@@ -1,11 +1,13 @@
 variable "network_name" {
   description = "The name of the VPC network"
   type        = string
+ default = "example-vpc-09"
 }
 
 variable "subnet_name" {
   description = "The name of the VPC subnet"
   type        = string
+ default = 
 }
 
 variable "subnet_cidr" {
