@@ -1,4 +1,4 @@
-esource "google_compute_firewall" "webserver_ssh" {
+resource "google_compute_firewall" "webserver_ssh" {
   name    = "webserver-firewall"
   network = "default"
 
