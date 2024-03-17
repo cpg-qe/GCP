@@ -1,5 +1,10 @@
 variable "credentials" {}
 
+variable "ssh_username" {
+  description = "Username associated with the SSH public key"
+  type        = string
+  default = "cmpdev"
+}
 
 variable "ssh_public_key_path" {
   description = "ssshkeyforgoogle.pub"
