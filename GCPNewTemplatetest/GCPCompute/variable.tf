@@ -9,6 +9,7 @@ variable "ssh_username" {
 variable "ssh_public_key_path" {
   description = "ssshkeyforgoogle.pub"
   type        = string
+  default = "ssshkeyforgoogle.pub"
 }
 
 
