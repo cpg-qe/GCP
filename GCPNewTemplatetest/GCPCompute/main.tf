@@ -42,11 +42,27 @@ resource "google_compute_instance" "vm_instance" {
         access_config {}
     }
 
-    metadata = {
-        ssh-keys = "${var.ssh_username}:${file(var.ssh_public_key_path)} ${var.ssh_username}@StrictHostKeyChecking=no"
-     }
+    metadata = var.authentication_type == "ssh_key" ? {
+    ssh-keys       = "${var.ssh_user}:${var.ssh_pub_key}"
+    enable-oslogin = "FALSE"
+  } : {}
+
+   metadata = var.authentication_type == "ssh_key" ? {
+    ssh-keys       = "${var.ssh_user}:${var.ssh_pub_key}"
+    enable-oslogin = "FALSE"
+  } : {}
 
 
-
+  metadata_startup_script = var.authentication_type == "ssh_key" ? "" : <<EOT
+    #!/bin/bash
+    # Set up a new user with a password
+    useradd -m -s /bin/bash "${var.vm_username}"
+    echo "${var.vm_username}:${var.vm_password}" | chpasswd
+    usermod -aG sudo "${var.vm_username}"
+    sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+    systemctl restart ssh
+  EOT
 
 }
+
+
