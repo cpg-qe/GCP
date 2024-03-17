@@ -42,9 +42,10 @@ resource "google_compute_instance" "vm_instance" {
         access_config {}
     }
 
-   metadata = {
-    ssh-keys = "username:${file(var.ssh_public_key_path)}"
-  }
+    metadata = {
+        ssh-keys = "${var.ssh_username}:${file(var.ssh_public_key_path)}"
+     }
+
 
 
 
