@@ -1,0 +1,39 @@
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "5.10.0"
+    }
+  }
+}
+
+provider "google" {
+  project = var.project_id
+  credentials = var.credentials
+
+}
+
+resource "google_sql_database_instance" "default" {
+  name             = var.instance_name
+  database_version = var.database_version
+  region           = var.region
+
+  settings {
+    tier = var.tier
+    ip_configuration {
+      ipv4_enabled = true
+    }
+  }
+}
+
+resource "google_sql_database" "example" {
+  name     = var.dbname
+  instance = google_sql_database_instance.default.name
+}
+
+# Example of creating a user for the database
+resource "google_sql_user" "users" {
+  name     = var.username
+  instance = google_sql_database_instance.default.name
+  password = var.password
+}
