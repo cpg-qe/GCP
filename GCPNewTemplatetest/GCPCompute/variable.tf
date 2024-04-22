@@ -26,6 +26,9 @@ default = "sundar"
 variable "Group" {
 default = "sundar"
 }
+variable "Team" {
+default = "CPG"
+}
 
 variable "firewallname" {
 default = "itomlab-firewall"
