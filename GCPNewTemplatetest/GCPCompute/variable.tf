@@ -23,6 +23,10 @@ variable "owner" {
 default = "sundar"
 }
 
+variable "Group" {
+default = "sundar"
+}
+
 variable "firewallname" {
 default = "itomlab-firewall"
 }
