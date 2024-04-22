@@ -19,6 +19,10 @@ variable "region" {
   default = "us-east1"
 }
 
+variable "owner" {
+default = "sundar"
+}
+
 variable "firewallname" {
 default = "itomlab-firewall"
 }
