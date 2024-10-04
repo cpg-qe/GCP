@@ -89,8 +89,8 @@ resource "google_compute_backend_service" "default" {
 # Create a health check for the backend service
 resource "google_compute_health_check" "default" {
   name               = "${var.resource_name_prefix}-${random_id.random_suffix.hex}-http-health-check"
-  timeout_sec        = 10
-  check_interval_sec = 5
+  timeout_sec        = 5   # Set this to be less than check_interval_sec
+  check_interval_sec = 10  # This can be greater than or equal to timeout_sec
   healthy_threshold  = 2
   unhealthy_threshold = 10
 
