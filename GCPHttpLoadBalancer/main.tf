@@ -20,7 +20,7 @@ resource "google_compute_firewall" "default" {
     ports    = ["80"]
   }
 
-  source_ranges = ["0.0.0.0/0"]
+  source_ranges = ["10.138.0.0/24"]
 }
 
 # Create a VPC network
@@ -50,7 +50,8 @@ resource "google_compute_instance" "default" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-10"
+      image = "ubuntu-1804-bionic-v20220131"
+      type  = "pd-balanced"
     }
   }
 
